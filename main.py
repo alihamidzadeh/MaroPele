@@ -1,16 +1,8 @@
 import random
-import time
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog as fd
-from tkinter.messagebox import showinfo
 from tkinter.filedialog import asksaveasfile
-
-
-
-
-
-
 
 
 def save_game():
@@ -26,8 +18,6 @@ def save_game():
 
     except (AttributeError, FileNotFoundError) as err:
         print(err)
-
-
 
 
 def load_game():
