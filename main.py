@@ -49,7 +49,6 @@ def load_game():
         else:
             flag_start2 = False
 
-
         if flag_start1:
             move_player(1, pos1)
 
@@ -63,18 +62,20 @@ def load_game():
             b1.configure(state='normal')
             b2.configure(state='disabled')
         f.close()
+        roll_log.set('The game was Loaded')
         messagebox.showinfo("Load", "The game was Loaded")
 
     except FileNotFoundError as err:
         print(err)
 
+
 def start_game():
     global dice, b1, b2, b5, b6
 
-    dice = PhotoImage(file="images/2.png")
+    dice = PhotoImage(file="images/dice-roll.png")
     b3 = Button(root, image=dice, height=80, width=125)
 
-    b4 = Button(root, text="Exit", height=2, width=8, fg="black", bg='green', font=("showcard gothic", 16, "bold"),
+    b4 = Button(root, text="Exit", height=2, width=8, fg="black", bg='red', font=("showcard gothic", 16, "bold"),
                 activebackground='red', command=root.destroy)
 
     yy = 20
@@ -96,7 +97,7 @@ def reset_players():
 
 def load_dice_images():
     global Dice
-    names = ['images/3.png', 'images/4.png', 'images/5.png', 'images/6.png', 'images/7.png', 'images/8.png']
+    names = ['images/D1.png', 'images/D2.png', 'images/D3.png', 'images/D4.png', 'images/D5.png', 'images/D6.png']
     for name in names:
         dice = PhotoImage(file=name)
         Dice.append(dice)
@@ -118,7 +119,7 @@ def roll_dice():
             flag_start1 = True
             pos1 = 1
             move_player(turn, pos1)
-            # turn = 2 TODO for again roll dice after Enter the game
+            # turn = 2      #for again roll dice after Enter the game
             # b1.configure(state='disabled')
             # b2.configure(state='normal')
 
@@ -149,7 +150,7 @@ def roll_dice():
             flag_start2 = True
             pos2 = 1
             move_player(turn, pos2)
-            # turn = 1  TODO for again roll dice after Enter the game
+            # turn = 1       #for again roll dice after Enter the game
             # b1.configure(state='normal')
             # b2.configure(state='disabled')
 
@@ -237,8 +238,11 @@ index = {100: (25, 20), 99: (100, 20), 98: (175, 20), 97: (250, 20), 96: (325, 2
          9: (645, 560), 10: (720, 560)}
 
 Dice = []
-ladder = {8: 29, 19: 57, 26: 45, 46: 97, 50: 69, 60: 79, 73: 92}
-snake = {99: 43, 94: 66, 85: 55, 70: 13, 63: 25, 48: 6, 39: 3}
+
+# ladder = {8: 29, 19: 57, 26: 45, 46: 97, 50: 69, 60: 79, 73: 92}        #For Base1.png
+# snake = {99: 43, 94: 66, 85: 55, 70: 13, 63: 25, 48: 6, 39: 3}          #For Base1.png
+ladder = {1: 38, 4: 14, 21: 42, 9: 31, 28: 84, 51: 67, 72: 91, 80: 99}  # For Base2.png
+snake = {62: 19, 64: 60, 17: 7, 54: 34, 87: 36, 95: 75, 93: 73, 98: 79}  # For Base2.png
 pos1 = None
 pos2 = None
 flag_start1 = False
@@ -247,13 +251,14 @@ root = Tk()
 root.title("Snake and Ladder")
 root.geometry("950x640")
 root.wm_attributes("-topmost", 1)  # set always on top
-bg = PhotoImage(file="images/1.png")
+# bg = PhotoImage(file="images/Base1.png")
+bg = PhotoImage(file="images/Base2.png")
 label1 = Label(root, image=bg)
 label1.place(x=0, y=0)
 
-b1 = Button(root, text="Player1", height=2, width=8, fg="black", bg='blue', font=("showcard gothic", 16, "bold"),
+b1 = Button(root, text="Player1", height=2, width=8, fg="black", bg='#00729b', font=("showcard gothic", 16, "bold"),
             activebackground='blue', command=roll_dice)
-b2 = Button(root, text="Player2", height=2, width=8, fg="black", bg='red', font=("showcard gothic", 16, "bold"),
+b2 = Button(root, text="Player2", height=2, width=8, fg="black", bg='#fff260', font=("showcard gothic", 16, "bold"),
             activebackground='red', command=roll_dice)
 
 b2.configure(state='disabled')
@@ -267,16 +272,15 @@ b6 = Button(root, text="Load", height=1, width=4, fg="red", bg='yellow', font=("
 roll_log = StringVar()
 label2 = Label(root, textvariable=roll_log, bg='green', font=('Cursive', 16, 'bold'))
 label2.place(x=400, y=605)
-
+roll_log.set("It's player 1's turn")
 player1 = Canvas(root, width=30, height=30)
-player1.create_oval(10, 10, 30, 30, fill='blue')
+player1.create_oval(10, 10, 30, 30, fill='#00729b')
 player1.place(x=0, y=600)
 
 player2 = Canvas(root, width=30, height=30)
-player2.create_oval(10, 10, 30, 30, fill='red')
+player2.create_oval(10, 10, 30, 30, fill='#fff260')
 player2.place(x=50, y=600)
 turn = 1
-
 reset_players()
 load_dice_images()
 start_game()
