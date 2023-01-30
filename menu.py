@@ -1,7 +1,7 @@
 import sys
 import os
 from tkinter import *
-
+from pathlib import Path
 
 class GUI:
 
@@ -21,7 +21,7 @@ class GUI:
         self.root.configure(width=512,
                             height=512)
 
-        self.bg = PhotoImage(file="images/Snake_And_Ladder_Image.png")
+        self.bg = PhotoImage(file=Path("images/Snake_And_Ladder_Image.png"))
 
         self.label1 = Label(self.root, image=self.bg)
         self.label1.place(x=0, y=0)

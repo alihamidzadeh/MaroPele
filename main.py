@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog as fd
 from tkinter.filedialog import asksaveasfile
-
+from pathlib import Path
 
 def save_game():
     global turn, pos1, pos2, flag_start1, flag_start2
@@ -32,7 +32,7 @@ def load_game():
 
         filename = fd.askopenfilename(title='Open a file', initialdir='/', filetypes=filetypes)
 
-        f = open(filename, "r")
+        f = open(Path(filename), "r")
         turn = int(f.readline().replace('\n', ''))
         pos1 = int(f.readline().replace('\n', ''))
         pos2 = int(f.readline().replace('\n', ''))
@@ -72,7 +72,7 @@ def load_game():
 def start_game():
     global dice, b1, b2, b5, b6
 
-    dice = PhotoImage(file="images/dice-roll.png")
+    dice = PhotoImage(file=Path("images/dice-roll.png"))
     b3 = Button(root, image=dice, height=80, width=125)
 
     b4 = Button(root, text="Exit", height=2, width=8, fg="black", bg='red', font=("showcard gothic", 16, "bold"),
@@ -99,7 +99,7 @@ def load_dice_images():
     global Dice
     names = ['images/D1.png', 'images/D2.png', 'images/D3.png', 'images/D4.png', 'images/D5.png', 'images/D6.png']
     for name in names:
-        dice = PhotoImage(file=name)
+        dice = PhotoImage(file=Path(name))
         Dice.append(dice)
 
 
@@ -252,7 +252,7 @@ root.title("Snake and Ladder")
 root.geometry("950x640")
 root.wm_attributes("-topmost", 1)  # set always on top
 # bg = PhotoImage(file="images/Base1.png")
-bg = PhotoImage(file="images/Base2.png")
+bg = PhotoImage(file=Path("images/Base2.png"))
 label1 = Label(root, image=bg)
 label1.place(x=0, y=0)
 
